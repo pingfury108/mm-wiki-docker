@@ -1,0 +1,21 @@
+version: "3.5"
+services:
+  mariadb:
+    image: mariadb:10.5.9
+    container_name: mm-wiki-db
+    environment:
+      MYSQL_ROOT_PASSWORD: pass
+    networks:
+      - mm-wiki
+    ports:
+      - 3306:3306
+  mm-wiki:
+    image: mm-wiki:v0.2
+    container_name: mm-wiki
+    networks:
+      - mm-wiki
+    ports:
+      - 8089:8089
+
+networks:
+  mm-wiki:
