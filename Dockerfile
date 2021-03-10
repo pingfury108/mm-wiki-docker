@@ -7,7 +7,8 @@ WORKDIR /app
 RUN git clone https://github.com/phachon/mm-wiki.git
 RUN go env -w GO111MODULE=on \
     && go env -w GOPROXY=https://goproxy.cn,direct
-RUN mm-wiki/build.sh
+WORKDIR /app/mm-wiki
+RUN ./build.sh
 
 FROM alpine:3.12
 ENV TZ=Asia/Shanghai
@@ -18,4 +19,4 @@ COPY ./docker-entrypoint.sh /mm-wiki/
 
 EXPOSE 8090
 
-CMD [ "docker-entrypoint.sh" ]
+CMD [ "/mm-wiki/docker-entrypoint.sh" ]
