@@ -5,6 +5,8 @@ services:
     container_name: mm-wiki-db
     environment:
       MYSQL_ROOT_PASSWORD: pass
+    volumes:
+      - mariadb:/var/lib/mysql
     networks:
       - mm-wiki
     ports:
@@ -12,10 +14,16 @@ services:
   mm-wiki:
     image: mm-wiki:v0.2
     container_name: mm-wiki
+    volumes:
+      - mm-wiki:/mm-wiki/data
     networks:
       - mm-wiki
     ports:
-      - 8089:8089
+      - 8090:8090
 
 networks:
+  mm-wiki:
+
+volumes:
+  mariadb:
   mm-wiki:
